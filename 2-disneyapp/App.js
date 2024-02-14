@@ -5,6 +5,7 @@ import PokemonList from './src/screens/PokemonList';
 import LoginForm from './src/screens/LoginForm';
 import { NavigationContainer } from '@react-navigation/native';
 import NavigationStacks from './src/navigation/NavigationStacks';
+import NavigationTabs from './src/navigation/NavigationTabs';
 
 export default function App() {
   // return <PokemonList /> 
@@ -16,7 +17,8 @@ export default function App() {
       <LoginForm name="CARLA" surname="CARLA CARLA"/>
     </View>*/
     <NavigationContainer>
-      <NavigationStacks />
+      {/*1º) <NavigationStacks /> */}
+      <NavigationTabs/>
     </NavigationContainer>
   );
       
