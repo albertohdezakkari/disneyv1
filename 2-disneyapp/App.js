@@ -6,6 +6,7 @@ import LoginForm from './src/screens/LoginForm';
 import { NavigationContainer } from '@react-navigation/native';
 import NavigationStacks from './src/navigation/NavigationStacks';
 import NavigationTabs from './src/navigation/NavigationTabs';
+import Navigation from './src/navigation/Navigation';
 
 export default function App() {
   // return <PokemonList /> 
@@ -18,7 +19,7 @@ export default function App() {
     </View>*/
     <NavigationContainer>
       {/*1º) <NavigationStacks /> */}
-      <NavigationTabs/>
+      <Navigation />
     </NavigationContainer>
   );
       

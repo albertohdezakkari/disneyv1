@@ -1,69 +1,50 @@
-import React, { useEffect, useState } from "react";
-import {View, Text, FlatList, SafeAreaView, StyleSheet, Image} from "react-native";
+import React from "react";
+import {
+  StyleSheet,
+  Text,
+  FlatList,
+  View,
+  Image,
+  TextInput,
+} from "react-native";
+import PokemonCard from "../components/PokemonCard";
 
-const PokemonList = () => {
-    const [pokemons, setPokemons] = useState([]);
+export default function PokemonList(props) {
+  const { peliculas } = props;
 
-    useEffect(() => {
-      const fetchPokemons = async () => {
-        try {
-          const response = await fetch(
-            "https://pokeapi.co/api/v2/pokemon?limit=10"
-          );
-          const data = await response.json();
-          for (const pokemon of data.results) {
-            fetch(pokemon.url)
-              .then((response) => response.json())
-              .then((details) => {
-                setPokemons((prevPokemons) => [...prevPokemons, details]); // rellena con un objet más
-              });
-          }
-        } catch (error) {
-          console.error(error);
-        }
-      };
-  
-      fetchPokemons();
-    }, []);
-    
-      return (
-        <SafeAreaView style={styles.safeArea}>
-          <FlatList
-            data={pokemons}
-            keyExtractor={(item) => item.name}
-            renderItem={({ item }) => (
-              <View style={styles.listItem}>
-                <Image
-                  source={{ uri: item.sprites.front_default }}
-                  style={styles.image}
-                />
-                <Text style={styles.text}>{item.name}</Text>
-              </View>
-          )}
-      />
-    </SafeAreaView>
-      );
-      
-};
+  return (
+    <FlatList
+      data={peliculas}
+      numColumns={2}
+      showsVerticalScrollIndicator={false}
+      keyExtractor={(item) => item.id.toString()}
+      renderItem={({ item }) => <PokemonCard item={item} />}
+       /*renderItem={({ item }) => (
+        <View style={styles.card}>
+          <Image source={{ uri: item.imagen }} style={styles.image} />
+          <Text style={styles.name}>{item.name}</Text>
+        </View>
+      )}*/
+      contentContainerStyle={styles.flatListContentContainer}
+    />
+  );
+}
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1, // Asegura que SafeAreaView use todo el espacio disponible
+  flatListContentContainer: {
+    paddingHorizontal: 5,
   },
-  listItem: {
-    flexDirection: "row",
-    padding: 10,
-    alignItems: "center",
+  card: {
+    flex: 1,
   },
-  image: {
-    width: 50,
+  container: {
+    flex: 1,
+    /*marginTop: 20,*/
+  },
+  picker: {
+    margin: 5,
     height: 50,
-    marginRight: 10,
-  },
-  text: {
-    fontSize: 18,
+    width: "80%",
+    alignSelf: "center",
   },
 });
-
-export default PokemonList;
-
